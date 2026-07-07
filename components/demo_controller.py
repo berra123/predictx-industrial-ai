@@ -8,6 +8,21 @@ def show_demo_controller():
 
     st.subheader("🎬 Demo Controller")
 
+    # Senaryo Seçimi
+    selected = st.selectbox(
+        "Scenario",
+        [
+            "Normal",
+            "Bearing Wear",
+            "Overheating",
+            "Motor Failure"
+        ]
+    )
+
+    scenario.set_scenario(selected)
+
+    st.divider()
+
     # Durum bilgisi
     if scenario.is_running():
         st.success("Status : 🟢 RUNNING")

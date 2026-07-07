@@ -1,6 +1,7 @@
 from services.anomaly_detector import detect_anomaly
 from services.prediction_engine import make_prediction
 from services.alarm_engine import create_alarm
+from services.event_engine import log_event
 
 from database.prediction_repository import insert_prediction
 
@@ -19,6 +20,13 @@ def process_telemetry(data):
         prediction
     )
 
+    # AI Prediction Event
+    log_event(
+        "PREDICTION",
+        "AI Prediction Generated",
+        f"Risk Score: {prediction['risk']}%"
+    )
+
     # Anomali tespiti
     alarm = detect_anomaly(data)
 
@@ -27,6 +35,15 @@ def process_telemetry(data):
         data["machine"],
         alarm
     )
+
+    # Alarm Event
+    if alarm["level"] != "NORMAL":
+
+        log_event(
+            "ALARM",
+            f"{alarm['level']} Alarm",
+            alarm.get("description", "No description")
+        )
 
     return {
         "prediction": prediction,
