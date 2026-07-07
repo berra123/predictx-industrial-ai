@@ -12,7 +12,6 @@ from components.live_charts import show_live_charts
 
 def show_dashboard():
 
-    # Veri Katmanı
     factory = get_factory_data()
 
     telemetry = factory["telemetry"]
@@ -27,30 +26,27 @@ def show_dashboard():
 
     st.divider()
 
-    # Demo Controller
     show_demo_controller()
 
     st.divider()
 
-    # KPI Kartları
     show_kpi_cards()
 
     st.divider()
 
-    # Dijital Üretim Hattı
     show_digital_twin()
 
     st.divider()
 
-    # Hibrit Andon Paneli
-    show_andon_panel(telemetry)
+    show_andon_panel(
+        telemetry,
+        alarm
+    )
 
     st.divider()
 
-    # AI Prediction Center
     show_ai_prediction(prediction)
 
     st.divider()
 
-    # Canlı Telemetri Grafikleri
     show_live_charts()
