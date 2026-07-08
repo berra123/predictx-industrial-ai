@@ -1,7 +1,10 @@
+from ml.predict import predict_risk
+
+
 def make_prediction(data):
     """
     AI Prediction Engine
-    Telemetry verilerinden makine sağlığını analiz eder.
+    ML modeli kullanarak makine sağlığını analiz eder.
     """
 
     current = data["current"]
@@ -10,48 +13,35 @@ def make_prediction(data):
     torque = data["torque"]
 
     # ==========================
-    # Health Score
+    # ML Risk Prediction
     # ==========================
 
-    health = 100
+    risk = predict_risk(
+        current,
+        temperature,
+        vibration,
+        torque
+    )
 
-    # Current
-    if current > 130:
-        health -= 20
-    elif current > 120:
-        health -= 10
+    risk = round(risk)
 
-    # Temperature
-    if temperature > 70:
-        health -= 30
-    elif temperature > 60:
-        health -= 15
-
-    # Vibration
-    if vibration > 4:
-        health -= 30
-    elif vibration > 3:
-        health -= 15
-
-    # Torque
-    if torque > 430:
-        health -= 20
-    elif torque > 400:
-        health -= 10
-
-    health = max(0, health)
-
-    # ==========================
-    # Risk
-    # ==========================
-
-    risk = 100 - health
+    # Health
+    health = max(
+        0,
+        100 - risk
+    )
 
     # Confidence
-    confidence = max(80, 98 - risk // 4)
+    confidence = max(
+        80,
+        98 - risk // 4
+    )
 
     # Remaining Useful Life
-    remaining_life = max(5, 180 - (risk * 2))
+    remaining_life = max(
+        5,
+        180 - (risk * 2)
+    )
 
     # ==========================
     # Failure Type
