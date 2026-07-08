@@ -1,11 +1,14 @@
 import streamlit as st
 
+from components.prediction_history import show_prediction_history
+from components.plc_info import show_plc_info
 from data_sources.factory_data import get_factory_data
 
 from components.live_charts import show_live_charts
 from components.pulper_twin import show_pulper_twin
 from components.ai_diagnosis import show_ai_diagnosis
 from components.maintenance_panel import show_maintenance_panel
+from components.event_timeline import show_event_timeline
 
 
 def show_pulper():
@@ -80,6 +83,14 @@ def show_pulper():
     st.divider()
 
     # ==========================
+    # PLC Information
+    # ==========================
+
+    show_plc_info()
+
+    st.divider()
+
+    # ==========================
     # Live Sensor Values
     # ==========================
 
@@ -135,7 +146,9 @@ def show_pulper():
     # AI Diagnosis
     # ==========================
 
-    show_ai_diagnosis(prediction)
+    show_ai_diagnosis(
+        prediction
+    )
 
     st.divider()
 
@@ -143,7 +156,9 @@ def show_pulper():
     # Maintenance Center
     # ==========================
 
-    show_maintenance_panel(prediction)
+    show_maintenance_panel(
+        prediction
+    )
 
     st.divider()
 
@@ -156,6 +171,12 @@ def show_pulper():
     if alarm["level"] == "NORMAL":
 
         st.success(
+            alarm["description"]
+        )
+
+    elif alarm["level"] == "MEDIUM":
+
+        st.warning(
             alarm["description"]
         )
 
@@ -174,3 +195,11 @@ def show_pulper():
     st.subheader("📈 Live Trends")
 
     show_live_charts()
+
+    st.divider()
+
+    show_prediction_history()
+
+    st.divider()
+
+    show_event_timeline()
