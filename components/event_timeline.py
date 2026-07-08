@@ -29,17 +29,24 @@ def show_event_timeline():
 
     for event in reversed(events):
 
-        color = colors.get(event["event_type"], "#546E7A")
-        icon = icons.get(event["event_type"], "📌")
+        color = colors.get(
+            event["event_type"],
+            "#546E7A"
+        )
+
+        icon = icons.get(
+            event["event_type"],
+            "📌"
+        )
 
         st.markdown(
             f"""
 <div style="
 border-left:6px solid {color};
-padding:10px;
+padding:12px;
 margin-bottom:10px;
 background:#1B1E23;
-border-radius:8px;
+border-radius:10px;
 ">
 
 <b>{icon} {event['title']}</b><br>

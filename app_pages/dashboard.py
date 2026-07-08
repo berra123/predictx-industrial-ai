@@ -26,48 +26,73 @@ def show_dashboard():
         "AI Powered Predictive Maintenance for Paper Manufacturing"
     )
 
-    # 🏭 Factory Overview
-    show_factory_overview(prediction)
+    # =====================================
+    # Factory Overview
+    # =====================================
+
+    show_factory_overview(
+        prediction
+    )
 
     st.divider()
 
-    # 🎬 Demo Controller
+    # =====================================
+    # Demo Controller
+    # =====================================
+
     show_demo_controller()
 
     st.divider()
 
-    # 📊 KPI Cards
+    # =====================================
+    # KPI Cards
+    # =====================================
+
     show_kpi_cards()
 
     st.divider()
 
-    # 🏭 Digital Twin
+    # =====================================
+    # Digital Twin
+    # =====================================
+
     show_digital_twin()
 
     st.divider()
 
-    # Ana içerik + Timeline
-    left, right = st.columns([3, 1])
+    # =====================================
+    # Hybrid Andon Panel
+    # =====================================
 
-    with left:
+    show_andon_panel(
+        telemetry,
+        alarm
+    )
 
-        # 🚨 Hybrid Andon
-        show_andon_panel(
-            telemetry,
-            alarm
-        )
+    st.divider()
 
-        st.divider()
+    # =====================================
+    # AI Prediction Center
+    # =====================================
 
-        # 🤖 AI Prediction
-        show_ai_prediction(prediction)
+    show_ai_prediction(
+        prediction
+    )
 
-        st.divider()
+    st.divider()
 
-        # 📈 Live Charts
-        show_live_charts()
+    # =====================================
+    # Live Trends
+    # =====================================
 
-    with right:
+    st.subheader("📈 Live Factory Trends")
 
-        # 🕒 Event Timeline
-        show_event_timeline()
+    show_live_charts()
+
+    st.divider()
+
+    # =====================================
+    # Event Timeline
+    # =====================================
+
+    show_event_timeline()
