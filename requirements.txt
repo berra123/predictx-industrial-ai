@@ -17,3 +17,5 @@ sqlalchemy>=2.0.32
 joblib
 
 mysql-connector-python
+
+xgboost==3.0.2
