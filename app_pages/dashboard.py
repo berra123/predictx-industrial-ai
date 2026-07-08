@@ -76,7 +76,8 @@ def show_dashboard():
     # =====================================
 
     show_ai_prediction(
-        prediction
+        prediction,
+        telemetry
     )
 
     st.divider()
