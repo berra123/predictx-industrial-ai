@@ -24,7 +24,8 @@ def insert_work_order(
             status,
             description
         )
-        VALUES (%s,%s,%s,%s,%s,%s)
+        VALUES
+        (%s,%s,%s,%s,%s,%s)
         """,
         (
             order_no,
@@ -37,5 +38,37 @@ def insert_work_order(
     )
 
     conn.commit()
+
     cursor.close()
     conn.close()
+
+
+def get_work_orders():
+
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT *
+        FROM work_orders
+        ORDER BY id DESC
+        """
+    )
+
+    rows = cursor.fetchall()
+
+    columns = [
+        desc[0]
+        for desc in cursor.description
+    ]
+
+    data = [
+        dict(zip(columns, row))
+        for row in rows
+    ]
+
+    cursor.close()
+    conn.close()
+
+    return data

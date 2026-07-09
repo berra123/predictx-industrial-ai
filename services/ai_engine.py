@@ -10,39 +10,29 @@ from database.settings_repository import get_setting
 
 
 def process_telemetry(data):
-    """
-    Yeni telemetri verisini işler.
-    """
 
-    # AI tahmini oluştur
     prediction = make_prediction(data)
 
-    # Tahmini veritabanına kaydet
     insert_prediction(
         data["machine"],
         prediction
     )
 
-    # AI Prediction Event
     log_event(
         "PREDICTION",
         "AI Prediction Generated",
         f"Risk Score: {prediction['risk']}%"
     )
 
-    # Anomali tespiti
     alarm = detect_anomaly(data)
 
-    # Alarmı veritabanına kaydet
     create_alarm(
         data["machine"],
         alarm
     )
 
-    # Alarm oluştuysa
     if alarm["level"] != "NORMAL":
 
-        # Alarm Event
         log_event(
             "ALARM",
             f"{alarm['level']} Alarm",
@@ -52,7 +42,6 @@ def process_telemetry(data):
             )
         )
 
-        # Email Notification
         email_enabled = (
             get_setting(
                 "email_notifications",
@@ -62,7 +51,10 @@ def process_telemetry(data):
 
         if (
             email_enabled and
-            alarm["level"] in ["HIGH", "CRITICAL"]
+            alarm["level"] in [
+                "HIGH",
+                "CRITICAL"
+            ]
         ):
 
             send_email_notification(
@@ -73,11 +65,14 @@ def process_telemetry(data):
             log_event(
                 "EMAIL",
                 "Notification Sent",
-                f"{alarm['level']} email sent for {data['machine']}"
+                f"{alarm['level']} email sent for "
+                f"{data['machine']}"
             )
 
-        # SAP PM Work Order Simulation
-        if alarm["level"] in ["HIGH", "CRITICAL"]:
+        if alarm["level"] in [
+            "HIGH",
+            "CRITICAL"
+        ]:
 
             work_order_no = create_work_order(
                 data["machine"],
@@ -87,7 +82,8 @@ def process_telemetry(data):
             log_event(
                 "WORK_ORDER",
                 "SAP PM Work Order Created",
-                f"Maintenance Order Created: {work_order_no}"
+                f"Maintenance Order Created: "
+                f"{work_order_no}"
             )
 
     return {

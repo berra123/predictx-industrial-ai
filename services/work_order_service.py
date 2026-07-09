@@ -1,12 +1,18 @@
 from datetime import datetime
 
-from database.work_order_repository import insert_work_order
+from database.work_order_repository import (
+    insert_work_order
+)
 
 
-def create_work_order(machine, alarm):
+def create_work_order(
+    machine,
+    alarm
+):
 
     order_no = (
-        f"PM-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        f"PM-"
+        f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
     )
 
     insert_work_order(
