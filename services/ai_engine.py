@@ -1,3 +1,4 @@
+from services.work_order_service import create_work_order
 from services.anomaly_detector import detect_anomaly
 from services.prediction_engine import make_prediction
 from services.alarm_engine import create_alarm
@@ -32,19 +33,23 @@ def process_telemetry(data):
     # Anomali tespiti
     alarm = detect_anomaly(data)
 
-    # Alarmı işle ve veritabanına kaydet
+    # Alarmı veritabanına kaydet
     create_alarm(
         data["machine"],
         alarm
     )
 
-    # Alarm Event
+    # Alarm oluştuysa
     if alarm["level"] != "NORMAL":
 
+        # Alarm Event
         log_event(
             "ALARM",
             f"{alarm['level']} Alarm",
-            alarm.get("description", "No description")
+            alarm.get(
+                "description",
+                "No description"
+            )
         )
 
         # Email Notification
@@ -69,6 +74,20 @@ def process_telemetry(data):
                 "EMAIL",
                 "Notification Sent",
                 f"{alarm['level']} email sent for {data['machine']}"
+            )
+
+        # SAP PM Work Order Simulation
+        if alarm["level"] in ["HIGH", "CRITICAL"]:
+
+            work_order_no = create_work_order(
+                data["machine"],
+                alarm
+            )
+
+            log_event(
+                "WORK_ORDER",
+                "SAP PM Work Order Created",
+                f"Maintenance Order Created: {work_order_no}"
             )
 
     return {
