@@ -5,21 +5,26 @@ from database.work_order_repository import (
 )
 
 
-def create_work_order(
-    machine,
-    alarm
-):
+def create_work_order(machine, alarm):
 
     order_no = (
-        f"PM-"
-        f"{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        f"PM-{datetime.now().strftime('%Y%m%d%H%M%S')}"
     )
+
+    if alarm["level"] == "MEDIUM":
+        assigned_team = "Predictive Maintenance Team"
+
+    elif alarm["level"] == "HIGH":
+        assigned_team = "Mechanical Maintenance Team"
+
+    else:
+        assigned_team = "Emergency Response Team"
 
     insert_work_order(
         order_no,
         machine,
         alarm["level"],
-        "Mechanical Maintenance Team",
+        assigned_team,
         "OPEN",
         alarm["description"]
     )

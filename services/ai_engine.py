@@ -11,6 +11,7 @@ from database.settings_repository import get_setting
 
 def process_telemetry(data):
 
+    # AI Prediction
     prediction = make_prediction(data)
 
     insert_prediction(
@@ -24,6 +25,7 @@ def process_telemetry(data):
         f"Risk Score: {prediction['risk']}%"
     )
 
+    # Alarm Detection
     alarm = detect_anomaly(data)
 
     create_alarm(
@@ -36,12 +38,10 @@ def process_telemetry(data):
         log_event(
             "ALARM",
             f"{alarm['level']} Alarm",
-            alarm.get(
-                "description",
-                "No description"
-            )
+            alarm["description"]
         )
 
+        # Email Notification
         email_enabled = (
             get_setting(
                 "email_notifications",
@@ -65,26 +65,20 @@ def process_telemetry(data):
             log_event(
                 "EMAIL",
                 "Notification Sent",
-                f"{alarm['level']} email sent for "
-                f"{data['machine']}"
+                f"{alarm['level']} email sent for {data['machine']}"
             )
 
-        if alarm["level"] in [
-            "HIGH",
-            "CRITICAL"
-        ]:
+        # SAP PM Work Order
+        work_order_no = create_work_order(
+            data["machine"],
+            alarm
+        )
 
-            work_order_no = create_work_order(
-                data["machine"],
-                alarm
-            )
-
-            log_event(
-                "WORK_ORDER",
-                "SAP PM Work Order Created",
-                f"Maintenance Order Created: "
-                f"{work_order_no}"
-            )
+        log_event(
+            "WORK_ORDER",
+            "SAP PM Work Order Created",
+            f"Maintenance Order Created: {work_order_no}"
+        )
 
     return {
         "prediction": prediction,
