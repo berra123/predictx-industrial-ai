@@ -4,15 +4,19 @@ from database.alarm_read_repository import get_last_100_alarms
 
 
 def get_color(level):
-    if level == "HIGH":
-        return "#C62828"
+    if level == "CRITICAL":
+        return "#B71C1C"
+    elif level == "HIGH":
+        return "#E65100"
     elif level == "MEDIUM":
         return "#F9A825"
     return "#2E7D32"
 
 
 def get_icon(level):
-    if level == "HIGH":
+    if level == "CRITICAL":
+        return "🚨"
+    elif level == "HIGH":
         return "🔴"
     elif level == "MEDIUM":
         return "🟡"
@@ -32,9 +36,9 @@ def show_alarm_card(alarm):
         border-radius:10px;
         background-color:#1E1E1E;
         ">
-            <h4>{icon} {alarm["alarm_level"]}</h4>
+            <h4>{icon} {alarm["alarm_level"]} - {alarm["alarm_type"]}</h4>
+
             <b>Machine:</b> {alarm["machine"]}<br>
-            <b>Type:</b> {alarm["alarm_type"]}<br>
             <b>Description:</b> {alarm["description"]}<br>
             <b>Timestamp:</b> {alarm["timestamp"]}
         </div>
@@ -44,31 +48,70 @@ def show_alarm_card(alarm):
 
 
 def show_alarms():
+
     st.title("🚨 Alarm Center")
     st.caption("Real-Time AI Alarm Monitoring")
 
     alarms = get_last_100_alarms()
+
     st.divider()
 
     if len(alarms) == 0:
         st.success("No active alarms.")
         return
 
-    # Üst Metrikler (Toplam Sayaçlar)
-    critical = sum(1 for a in alarms if a["alarm_level"] == "HIGH")
-    warning = sum(1 for a in alarms if a["alarm_level"] == "MEDIUM")
-    info = sum(1 for a in alarms if a["alarm_level"] == "NORMAL")
+    # ==========================
+    # Metrics
+    # ==========================
 
-    col1, col2, col3 = st.columns(3)
-    col1.metric("🔴 Critical", critical)
-    col2.metric("🟡 Warning", warning)
-    col3.metric("🟢 Normal", info)
+    critical = sum(
+        1 for a in alarms
+        if a["alarm_level"] == "CRITICAL"
+    )
+
+    high = sum(
+        1 for a in alarms
+        if a["alarm_level"] == "HIGH"
+    )
+
+    medium = sum(
+        1 for a in alarms
+        if a["alarm_level"] == "MEDIUM"
+    )
+
+    normal = sum(
+        1 for a in alarms
+        if a["alarm_level"] == "NORMAL"
+    )
+
+    col1, col2, col3, col4 = st.columns(4)
+
+    col1.metric(
+        "🚨 Critical",
+        critical
+    )
+
+    col2.metric(
+        "🔴 High",
+        high
+    )
+
+    col3.metric(
+        "🟡 Warning",
+        medium
+    )
+
+    col4.metric(
+        "🟢 Normal",
+        normal
+    )
 
     st.divider()
 
     # ==========================
-    # Filters (Filtreleri Üste Aldık)
+    # Filters
     # ==========================
+
     st.subheader("🔍 Alarm Filters")
 
     f_col1, f_col2 = st.columns(2)
@@ -76,17 +119,34 @@ def show_alarms():
     with f_col1:
         selected_level = st.selectbox(
             "Alarm Level",
-            ["ALL", "HIGH", "MEDIUM", "NORMAL"]
+            [
+                "ALL",
+                "CRITICAL",
+                "HIGH",
+                "MEDIUM",
+                "NORMAL"
+            ]
         )
 
     with f_col2:
-        machines = ["ALL"] + sorted(list(set(a["machine"] for a in alarms)))
+        machines = ["ALL"] + sorted(
+            list(
+                set(
+                    a["machine"]
+                    for a in alarms
+                )
+            )
+        )
+
         selected_machine = st.selectbox(
             "Machine",
             machines
         )
 
-    # Filtreleme İşlemi
+    # ==========================
+    # Filtering
+    # ==========================
+
     filtered_alarms = alarms
 
     if selected_level != "ALL":
@@ -104,12 +164,15 @@ def show_alarms():
     st.divider()
 
     # ==========================
-    # Alarm Cards (Filtrelenmiş Son 10 Alarm)
+    # Recent Alarms
     # ==========================
+
     st.subheader("🚨 Recent Alarms")
-    
+
     if len(filtered_alarms) == 0:
-        st.info("No alarms match the selected filters.")
+        st.info(
+            "No alarms match the selected filters."
+        )
     else:
         for alarm in reversed(filtered_alarms[-10:]):
             show_alarm_card(alarm)
@@ -117,17 +180,22 @@ def show_alarms():
     st.divider()
 
     # ==========================
-    # Alarm History (Filtrelenmiş Tablo)
+    # Alarm History
     # ==========================
+
     st.subheader("📋 Alarm History")
 
     if len(filtered_alarms) > 0:
-        # HATA DÜZELTİLDİ: Artık 'alarms' yerine 'filtered_alarms' basılıyor
-        df = pd.DataFrame(filtered_alarms) 
+
+        df = pd.DataFrame(filtered_alarms)
+
         st.dataframe(
             df,
             use_container_width=True,
             hide_index=True
         )
+
     else:
-        st.info("No history data to display for current filters.")
+        st.info(
+            "No history data to display for current filters."
+        )
