@@ -70,36 +70,36 @@ class ScenarioEngine:
         # =========================
         elif self.scenario == "Bearing Wear":
 
-            self.current += random.uniform(-0.5, 1.5)
-            self.temperature += random.uniform(0.2, 0.8)
-            self.vibration += random.uniform(0.10, 0.25)
-            self.torque += random.uniform(1, 4)
+            self.current += random.uniform(0.5, 2.0)
+            self.temperature += random.uniform(0.5, 1.2)
+            self.vibration += random.uniform(0.15, 0.35)
+            self.torque += random.uniform(1, 5)
 
         # =========================
         # OVERHEATING
         # =========================
         elif self.scenario == "Overheating":
 
-            self.current += random.uniform(0.5, 2.0)
-            self.temperature += random.uniform(0.8, 1.6)
-            self.vibration += random.uniform(-0.05, 0.10)
-            self.torque += random.uniform(0, 3)
+            self.current += random.uniform(1.0, 3.0)
+            self.temperature += random.uniform(1.5, 3.0)
+            self.vibration += random.uniform(0.0, 0.15)
+            self.torque += random.uniform(1, 4)
 
         # =========================
         # MOTOR FAILURE
         # =========================
         elif self.scenario == "Motor Failure":
 
-            self.current += random.uniform(1.0, 2.5)
-            self.temperature += random.uniform(1.0, 2.0)
-            self.vibration += random.uniform(0.15, 0.30)
-            self.torque += random.uniform(2, 5)
+            self.current += random.uniform(3.0, 5.0)
+            self.temperature += random.uniform(2.5, 4.5)
+            self.vibration += random.uniform(0.35, 0.65)
+            self.torque += random.uniform(4, 8)
 
         # Güvenli limitler
-        self.current = min(max(self.current, 105), 145)
-        self.temperature = min(max(self.temperature, 50), 80)
-        self.vibration = min(max(self.vibration, 1.5), 5.5)
-        self.torque = min(max(self.torque, 380), 450)
+        self.current = min(max(self.current, 105), 170)
+        self.temperature = min(max(self.temperature, 50), 95)
+        self.vibration = min(max(self.vibration, 1.5), 7.0)
+        self.torque = min(max(self.torque, 380), 500)
 
         return {
 
