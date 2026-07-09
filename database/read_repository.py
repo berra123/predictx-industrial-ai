@@ -1,10 +1,14 @@
 from database.connection import get_connection
+from psycopg2.extras import RealDictCursor
 
 
 def get_last_100_telemetry():
 
     conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
+
+    cursor = conn.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     sql = """
     SELECT *

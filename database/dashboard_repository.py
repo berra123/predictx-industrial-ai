@@ -1,13 +1,20 @@
 from database.connection import get_connection
+from psycopg2.extras import RealDictCursor
 
 
 def get_dashboard_statistics():
 
     conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
+
+    cursor = conn.cursor(
+        cursor_factory=RealDictCursor
+    )
 
     # Toplam telemetri
-    cursor.execute("SELECT COUNT(*) AS total FROM telemetry")
+    cursor.execute("""
+        SELECT COUNT(*) AS total
+        FROM telemetry
+    """)
     telemetry_count = cursor.fetchone()["total"]
 
     # Farklı makine sayısı
