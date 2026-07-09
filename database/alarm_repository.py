@@ -36,4 +36,3 @@ def insert_alarm(machine, alarm):
     conn.commit()
 
     cursor.close()
-    conn.close()

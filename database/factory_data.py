@@ -1,6 +1,6 @@
 from services.ai_engine import process_telemetry
 
-from database.telemetry_repository import insert_telemetry
+# from database.telemetry_repository import insert_telemetry
 
 from data_sources.demo_source import get_demo_data
 from data_sources.history_buffer import add_record
@@ -18,8 +18,8 @@ def get_factory_data():
         # History Buffer
         add_record(data)
 
-        # MySQL
-        insert_telemetry(data)
+        # MySQL (Cloud demo sürümünde kapalı)
+        # insert_telemetry(data)
 
         # AI
         ai_result = process_telemetry(data)
