@@ -1,99 +1,78 @@
 # 🏭 PredictX Industrial AI Platform
 
-**[TR]** Akıllı üretim tesisleri için geliştirilmiş yapay zeka destekli kestirimci bakım platformu.  
-**[EN]** AI-powered predictive maintenance platform developed for smart manufacturing environments.
+[TR] Akıllı kağıt üretim tesisleri için geliştirilmiş, yapay zeka destekli kestirimci bakım platformu.
+[EN] AI-powered predictive maintenance platform developed for smart paper manufacturing environments.
 
 ---
 
-## 🇹🇷 Türkçe
+## 🇹🇷 Türkçe Proje Özeti
 
-### 📌 Proje Özeti
-PredictX, gerçek zamanlı makine telemetri verilerini analiz ederek makine öğrenmesi ve anomali tespit algoritmaları sayesinde arızaları gerçekleşmeden önce tahmin eden yapay zeka destekli bir kestirimci bakım platformudur.  
-Platform; plansız duruş sürelerini azaltmayı, bakım maliyetlerini optimize etmeyi ve ekipman güvenilirliğini artırmayı hedeflemektedir.
+PredictX, gerçek zamanlı makine telemetri verilerini analiz eder; makine öğrenmesi ve anomali tespiti algoritmalarını kullanarak arızaları daha gerçekleşmeden önce tahmin eder.
 
 ### 🚀 Öne Çıkan Özellikler
 
 #### 🤖 Yapay Zeka Destekli Arıza Tahmini
-- Makine Sağlık Skoru hesaplama
-- Arıza risk tahmini
-- Kalan Faydalı Ömür (RUL) öngörüsü
-- Yapay zeka destekli bakım önerileri
+- **Makine Sağlık Skoru:** Ekipmanın genel sağlık durumunun gerçek zamanlı hesaplanması.
+- **Risk Tahmini:** Tahminleme modelleriyle arıza olasılıklarının belirlenmesi.
+- **RUL Öngörüsü:** Kritik bileşenler için Kalan Faydalı Ömür (Remaining Useful Life) tahmini.
+- **Akıllı Reçeteler:** Bakım ekipleri için yapay zeka destekli aksiyon önerileri.
 
 #### 🚨 Akıllı Alarm Merkezi
-- Gerçek zamanlı anomali tespiti
-- Kural tabanlı ve makine öğrenmesi destekli alarm sistemi
-- Çok seviyeli alarm yapısı (Düşük, Orta, Kritik)
-- Alarm geçmişi ve olay takibi
+- **Gerçek Zamanlı Tespit:** Kural tabanlı ve makine öğrenmesi destekli anomali algılama.
+- **Çok Seviyeli Alarmlar:** Kritiklik seviyesine göre ayrıştırılmış alarm sistemi (Düşük, Orta, Kritik).
+- **Geçmiş İzleme:** Kritik olayların takibi ve geçmiş alarm analizi.
 
 #### 📧 Bildirim Sistemi
-- Otomatik e-posta bildirimleri
-- Alarm önceliğine göre dinamik yönlendirme
-- Kritik olaylarda bakım ekiplerinin bilgilendirilmesi
+- **Otomatik Uyarılar:** Otomatik e-posta bildirim simülasyonu.
+- **Akıllı Yönlendirme:** Alarmın önem derecesine göre dinamik bildirim kuralları.
 
 #### 🛠 SAP PM İş Emri Simülasyonu
-- Kritik alarmlarda otomatik iş emri oluşturma
-- Öncelik bazlı ekip ataması
-- ERP bakım süreçlerinin simülasyonu
+- **Otomatik İş Emri:** Kritik alarmlar tetiklendiğinde otomatik bakım emri oluşturma.
+- **Önceliklendirme:** Arıza tipine göre akıllı bakım ekibi ataması ve öncelik yönetimi.
+- **ERP Entegrasyonu:** Simüle edilmiş SAP PM iş akışı entegrasyonu.
 
 #### 📊 Raporlama ve Analitik
-- Geçmiş alarm analizi
-- KPI ve bakım performans göstergeleri
-- Operasyonel verimlilik takibi
-
-### 🛠 Teknoloji Yığını
-
-| Katman | Teknolojiler |
-| :--- | :--- |
-| **Backend & Arayüz** | Python, Streamlit |
-| **Veritabanı** | PostgreSQL, Supabase, Psycopg2 |
-| **Yapay Zeka** | Scikit-Learn, Predictive Analytics |
-| **Bulut ve DevOps** | GitHub, Streamlit Community Cloud, Supabase |
+- **Geçmiş Analizi:** Geçmiş anomali ve alarm sıklıklarının derinlemesine analizi.
+- **KPI Takibi:** Bakım verimliliğini izleyen operasyonel istatistik paneli.
 
 ---
 
-## 🇬🇧 English
+## 🇬🇧 English Project Summary
 
-### 📌 Project Summary
-PredictX is an AI-powered predictive maintenance platform that analyzes real-time machine telemetry data and predicts failures before they occur using machine learning and anomaly detection algorithms.  
-The platform aims to reduce unplanned downtime, optimize maintenance operations, and improve equipment reliability.
+PredictX analyzes real-time machine telemetry data and predicts failures before they occur using machine learning and anomaly detection algorithms.
 
 ### 🚀 Key Features
 
 #### 🤖 AI Failure Prediction
-- Machine Health Score calculation
-- Failure risk estimation
-- Remaining Useful Life (RUL) prediction
-- AI-driven maintenance recommendations
+- **Machine Health Score:** Real-time calculation of overall equipment health.
+- **Risk Estimation:** Failure probability estimation using predictive models.
+- **RUL Prediction:** Remaining Useful Life forecasting for critical components.
 
 #### 🚨 Intelligent Alarm Center
-- Real-time anomaly detection
-- Rule-based and ML-driven alert system
-- Multi-level alarm structure (Low, Medium, Critical)
-- Alarm history and event tracking
+- **Real-Time Detection:** Instant rule-based and ML-driven anomaly detection.
+- **Multi-Level Alarms:** Categorized alert system (Low, Medium, Critical).
 
 #### 📧 Notification System
-- Automated email notifications
-- Dynamic severity-based routing
-- Maintenance team escalation workflows
+- **Automated Alerts:** Automatic email notification simulation.
+- **Smart Routing:** Configurable notification rules based on severity.
 
 #### 🛠 SAP PM Work Order Simulation
-- Automatic work order generation
-- Priority-based maintenance assignment
-- ERP maintenance workflow simulation
+- **Auto-Generation:** Automatic maintenance order generation triggered by critical alarms.
+- **Priority-Based Routing:** Smart priority assignment and maintenance team distribution.
 
 #### 📊 Reporting & Analytics
-- Historical alarm analysis
-- Maintenance KPI monitoring
-- Operational performance tracking
+- **KPI Monitoring:** Operational statistics dashboard tracking maintenance efficiency.
 
-### 🛠 Technology Stack
+---
 
-| Layer | Technologies |
+## 🛠 Technology Stack / Teknoloji Yığını
+
+| Layer / Katman | Technologies Used / Kullanılan Teknolojiler |
 | :--- | :--- |
 | **Backend & UI** | Python, Streamlit |
-| **Database** | PostgreSQL, Supabase, Psycopg2 |
-| **AI & Analytics**| Scikit-Learn, Predictive Analytics |
-| **Cloud & DevOps**| GitHub, Streamlit Community Cloud, Supabase |
+| **Database** | PostgreSQL (Supabase), Psycopg2 |
+| **AI / ML** | Scikit-Learn, Predictive Analytics, Rule-Based Anomaly Detection |
+| **DevOps & Cloud**| GitHub, Streamlit Community Cloud, Supabase |
 
 ---
 
@@ -101,14 +80,50 @@ The platform aims to reduce unplanned downtime, optimize maintenance operations,
 
 ```mermaid
 graph TD
-    A[Telemetry Data / Telemetri Verisi] --> B[AI Engine / YZ Motoru]
-    B --> C[Anomaly Detection / Anomali Motoru]
-    C --> D[Intelligent Alarms / Akıllı Alarmlar]
-    D --> E[Automated Notifications / Bildirimler]
-    D --> F[SAP PM Work Order Simulation / İş Emri]
-    F --> G[Event Timeline / Olay Zaman Çizelgesi]
+    A[Telemetry Data] --> B[AI Prediction Engine]
+    B --> C[Anomaly Detection Engine]
+    C --> D[Alarm Management]
+    D --> E[Email Notification]
+    D --> F[SAP PM Work Order Generation]
+    F --> G[Event Timeline]
     E --> G
     style A fill:#f9f,stroke:#333,stroke-width:2px
     style B fill:#bbf,stroke:#333,stroke-width:2px
     style D fill:#fbb,stroke:#333,stroke-width:2px
     style G fill:#bfb,stroke:#333,stroke-width:2px
+Örnek İş Akışı (Example Workflow)
+Üretim ekipmanından (Örn: Pulper-03) telemetri verisi gelir.
+
+Yapay zeka modeli risk skorunu hesaplar.
+
+Anomali motoru makine durumunu eşik değerlere göre inceler.
+
+Eşik aşılırsa akıllı alarm üretilir.
+
+Teknik ekibe otomatik e-posta bildirimi tetiklenir.
+
+SAP PM üzerinde otomatik olarak bakım iş emri ve ekip ataması oluşturulur.
+
+Merkezi olay zaman çizelgesi (Event Timeline) güncellenir.
+
+📦 Demo Components / Demo Bileşenleri
+Pulper-03 Digital Twin: Gerçek zamanlı dijital ikiz ve telemetri paneli.
+
+Alarm Center: Aktif izleme ve alarm yönetim arayüzü.
+
+Event Timeline: Operasyonel olayların kronolojik takibi.
+
+SAP PM Work Orders: Bakım planlama ve iş emri dağıtım merkezi.
+
+AI Prediction Center: Makine öğrenmesi model çıktıları ve parametre analizleri.
+
+📌 Version / Versiyon
+Current Version: v1.0 MVP
+
+✍️ Author / Geliştirici
+Berragül Çulha
+
+Industrial Engineering & Computer Programming Student
+
+Developed as an Industrial AI and Predictive Maintenance project.
+
