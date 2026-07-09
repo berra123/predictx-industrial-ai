@@ -1,17 +1,25 @@
 def detect_anomaly(data):
-    """
-    Telemetri verisini analiz ederek alarm seviyesini belirler.
-    """
 
     if (
+        data["temperature"] > 85
+        or data["vibration"] > 5
+        or data["current"] > 150
+    ):
+        return {
+            "level": "CRITICAL",
+            "type": "Motor Failure",
+            "description": "Immediate shutdown recommended."
+        }
+
+    elif (
         data["temperature"] > 70
         or data["vibration"] > 4
         or data["current"] > 135
     ):
         return {
             "level": "HIGH",
-            "type": "Critical Condition",
-            "description": "Immediate maintenance required."
+            "type": "Overheating",
+            "description": "Maintenance should be scheduled immediately."
         }
 
     elif (
@@ -21,7 +29,7 @@ def detect_anomaly(data):
     ):
         return {
             "level": "MEDIUM",
-            "type": "Warning",
+            "type": "Bearing Wear",
             "description": "Check machine parameters."
         }
 
