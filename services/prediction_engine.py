@@ -1,3 +1,4 @@
+from database.settings_repository import get_setting
 from ml.predict import predict_risk
 
 
@@ -11,6 +12,17 @@ def make_prediction(data):
     temperature = data["temperature"]
     vibration = data["vibration"]
     torque = data["torque"]
+
+    # ==========================
+    # Dynamic Settings
+    # ==========================
+
+    risk_threshold = int(
+        get_setting(
+            "risk_threshold",
+            70
+        )
+    )
 
     # ==========================
     # ML Risk Prediction
@@ -44,7 +56,7 @@ def make_prediction(data):
     )
 
     # ==========================
-    # Failure Type
+    # Failure Classification
     # ==========================
 
     if risk < 30:
@@ -68,7 +80,7 @@ def make_prediction(data):
             "next_inspection": "30 Days"
         }
 
-    elif risk < 60:
+    elif risk < risk_threshold:
 
         failure = "Bearing Wear"
 
@@ -89,7 +101,7 @@ def make_prediction(data):
             "next_inspection": "14 Days"
         }
 
-    elif risk < 80:
+    elif risk < min(risk_threshold + 20, 90):
 
         failure = "Mechanical Degradation"
 
