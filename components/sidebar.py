@@ -3,19 +3,9 @@ import streamlit as st
 
 def render_sidebar():
 
-    st.sidebar.markdown(
-        """
-        <div style="text-align:center; padding:15px 0;">
-            <h1 style="color:#3B82F6;margin-bottom:0;">
-                🏭 PredictX
-            </h1>
-
-            <p style="color:#94A3B8;margin-top:0;">
-                AI Powered Predictive Maintenance
-            </p>
-        </div>
-        """,
-        unsafe_allow_html=True
+    st.sidebar.title("🏭 PredictX")
+    st.sidebar.caption(
+        "AI Powered Predictive Maintenance"
     )
 
     st.sidebar.divider()
