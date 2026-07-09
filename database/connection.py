@@ -1,13 +1,14 @@
-import mysql.connector
+import psycopg2
 
 
 def get_connection():
 
-    connection = mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Berra2004?",
-        database="predictx_db"
+    connection = psycopg2.connect(
+        host="db.fqrwsgyxxedgnyqropif.supabase.co",
+        port=5432,
+        database="postgres",
+        user="postgres",
+        password="Berraculha2004"
     )
 
     return connection
